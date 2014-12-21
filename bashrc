@@ -1,5 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+export EDITOR="emacs -nw"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -74,8 +77,8 @@ esac
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Local alias definitions
-if [ -f ~/.bash_aliases_local ]; then
-    . ~/.bash_aliases_local
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -88,8 +91,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -111,6 +112,8 @@ alias emacs='emacs -nw'
 alias emacsw='emacs'
 
 # Directory shortcuts
+alias -- -='cd -'
+alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 
