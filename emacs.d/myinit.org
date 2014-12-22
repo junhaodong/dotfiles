@@ -11,6 +11,18 @@
 #+end_src
 
 ** Setup Package Install
+#+begin_src emacs-lisp
+  (defun sacha/package-install (package &optional repository)
+    "Install PACKAGE if it has not yet been installed.
+     If REPOSITORY is specified, use that."
+    (unless (package-installed-p package)
+      (let ((package-archives (if repository
+                                  (list (assoc repository package-archives))
+                                package-archives)))
+      (package-install package))))
+  (sacha/package-install 'use-package)
+  (require 'use-package)
+#+end_src
 
 ** Backups
 #+begin_src emacs-lisp
@@ -45,6 +57,10 @@
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cb" 'org-iswitchb)
 #+end_src
+** Modes
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+#+end_src
 
 ** Theme
 #+begin_src emacs-lisp
@@ -59,10 +75,13 @@
     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
+** Replace Yes-No w/ Y-N
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
 ** Miscellaneous
 #+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-  (fset 'yes-or-no-p 'y-or-n-p)
   (transient-mark-mode 1)
   (show-paren-mode 1)
 #+end_src
@@ -70,8 +89,22 @@
 * Programming
 ** Autocomplete
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/elpa/popup")
-  (require 'popup)
-  (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete")
-  (require 'auto-complete)
+  (sacha/package-install 'auto-complete)
+  (use-package auto-complete
+    :init
+    (progn
+      (require 'auto-complete-config)
+      (ac-config-default)
+      (setq ac-auto-show-menu t
+  	  ac-quick-help-delay 0.5
+            ac-sources '(
+  		  ac-source-symbols
+  		  ac-source-words-in-same-mode-buffers
+  		  ac-source-functions
+  		  ac-source-variables
+  		  ac-source-dictionary
+  		  ac-source-filename
+  		  ac-source-yasnippet
+  		  ))
+      (auto-complete-mode t)))
 #+end_src

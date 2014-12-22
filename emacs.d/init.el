@@ -1,8 +1,8 @@
 ;;; Junhao's Emacs Config
 
 ;; Set up load path to override it
-;(package-initialize nil)
-;(add-to-list 'load-path "~/.emacs.d/elpa/")
+(package-initialize nil)
+(add-to-list 'load-path "~/.emacs.d/elpa/*")
 (require 'package)
 (require 'org)
 (require 'ob-tangle)

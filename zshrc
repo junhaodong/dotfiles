@@ -58,16 +58,16 @@ bart='junhao.dong@149.89.151'
 marge='junhao.dong@149.89.161'
 
 # Updates time displayed in the prompt every second
-promptTime() {
-  emulate -L zsh
-  zmodload -i zsh/sched
-  # Remove existing event, so that multiple calls to `promptTime` work.
-  integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)promptTime]}
-  (( i )) && sched -$i
-  # Test that zle is running before calling the widget
-  # Otherwise update on entry to zle
-  zle && zle reset-prompt
-  # Increment time by a second
-  sched +1 promptTime
-}
-promptTime
+#promptTime() {
+#  emulate -L zsh
+#  zmodload -i zsh/sched
+#  # Remove existing event, so that multiple calls to `promptTime` work.
+#  integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)promptTime]}
+#  (( i )) && sched -$i
+#  # Test that zle is running before calling the widget
+#  # Otherwise update on entry to zle
+#  zle && zle reset-prompt
+#  # Increment time by a second
+#  sched +1 promptTime
+#}
+#promptTime
