@@ -17,8 +17,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=5000
+HISTFILESIZE=5000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -102,14 +102,12 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -Al'
 alias la='ls -A'
 alias l='ls -CF'
 
 # More 
 alias mkdir='mkdir -p'
-alias emacs='emacs -nw'
-alias emacsw='emacs'
 
 # Directory shortcuts
 alias -- -='cd -'
@@ -122,3 +120,6 @@ lisa='junhao.dong@149.89.160'
 homer='junhao.dong@149.89.150'
 bart='junhao.dong@149.89.151'
 marge='junhao.dong@149.89.161'
+
+# tmp until I get solarized colors working with zsh on startup
+zsh
