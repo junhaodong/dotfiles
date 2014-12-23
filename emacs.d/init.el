@@ -15,15 +15,14 @@
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-;; Add ELPA load path
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa/"))
-
 ;; Load packages
 (package-initialize t)
 (setq package-enable-at-startup nil)
 (org-babel-load-file "~/.emacs.d/myinit.org")
 
-;; Custom
+;; Misc
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
 (custom-set-variables
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default))))
 (custom-set-faces)

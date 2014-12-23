@@ -1,7 +1,6 @@
 #+TITLE: Junhao's Emacs Config
 #+STARTUP: overview
-#Based on Sacha Chua's config
-#TODO: use-package, helm, eshell, org: agenda+babel, YASnippets!!<<, etc
+Based on Sacha Chua's and Mike Zamansky's config
 
 * Basic Config
 ** Personal Info
@@ -44,28 +43,54 @@
   (setq inhibit-startup-screen t)
 #+end_src
 
-** Custom Key Bindings
-*** General
+** Key Bindings to Kill
 #+begin_src emacs-lisp
   (global-set-key "\C-w" 'backward-kill-word)
   (global-set-key "\C-x\C-k" 'kill-region)
 #+end_src
-
-*** Org Mode
-#+begin_src emacs-lisp
-  (global-set-key "\C-cl" 'org-store-link)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cb" 'org-iswitchb)
-#+end_src
-** Modes
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-#+end_src
-
 ** Theme
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/color-theme-solarized")
   (load-theme 'solarized-light t)
+#+end_src
+
+** Mode Line
+*** Compact Mode Line
+#+begin_src emacs-lisp
+  (sacha/package-install 'smart-mode-line)
+  (use-package smart-mode-line
+    :init
+    (progn
+      (setq-default mode-line-format 
+  		  '("%e"
+  		    mode-line-front-space
+  		    mode-line-mule-info
+  		    mode-line-client
+  		    mode-line-modified
+  		    mode-line-remote
+  		    mode-line-frame-identification
+  		    mode-line-buffer-identification
+  		    "   "
+  		    mode-line-position
+  		    (vc-mode vc-mode)
+  		    "  "
+  		    mode-line-modes
+  		    mode-line-misc-info
+   		    mode-line-end-spaces))))
+
+#+end_src
+
+*** Hide Minor Modes
+#+begin_src emacs-lisp
+  (require 'diminish)
+  (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+  (eval-after-load "smartparens" '(diminish 'smartparens-mode))
+  (diminish 'visual-line-mode)
+#+end_src
+
+** Replace Yes-No w/ Y-N
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 ** UTF-8
@@ -75,18 +100,33 @@
     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
-** Replace Yes-No w/ Y-N
-#+begin_src emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
 ** Miscellaneous
 #+begin_src emacs-lisp
   (transient-mark-mode 1)
   (show-paren-mode 1)
 #+end_src
    
+* Navigation
+** Pop to Mark
+#+begin_src emacs-lisp
+  (bind-key "C-x p" 'pop-to-mark-command)
+  (setq set-mark-command-repeat-pop t)
+#+end_src
+
+* Org
+** Key Bindings
+#+begin_src emacs-lisp
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+#+end_src
+
 * Programming
+** Tab Size
+#+begin_src emacs-lisp
+  (setq-default tab-width 2)
+#+end_src
+
 ** Autocomplete
 #+begin_src emacs-lisp
   (sacha/package-install 'auto-complete)
@@ -107,4 +147,134 @@
   		  ac-source-yasnippet
   		  ))
       (auto-complete-mode t)))
+#+end_src
+
+** Aggressive Indent
+#+begin_src emacs-lisp
+  (sacha/package-install 'aggressive-indent)
+  (use-package aggressive-indent
+    :init
+    (progn
+      (global-aggressive-indent-mode)))
+#+end_src
+
+** Smartparens
+#+begin_src emacs-lisp
+(sacha/package-install 'smartparens)
+(use-package smartparens 
+  :init
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode t)
+    (show-smartparens-global-mode t) ;; Highlights matching pairs
+
+    ;; Key Bindings
+    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+    
+    (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
+    (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
+    (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+    (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+    
+    (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
+    (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+    (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
+    (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
+    
+    (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
+    (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
+    
+    (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
+    (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
+    
+    (define-key sp-keymap (kbd "M-<delete>") 'sp-unwrap-sexp)
+    (define-key sp-keymap (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+    
+    (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+    (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+    (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+    (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+    
+    (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
+    (define-key sp-keymap (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
+    (define-key sp-keymap (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
+    (define-key sp-keymap (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
+    
+    (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
+    (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+    (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
+    
+    (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
+    (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
+    
+    (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
+    (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
+    (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
+    (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
+    (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
+    (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
+    (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
+    (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
+    (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
+
+    ;; Pair management
+    (sp-local-tag '(sgml-mode html-mode web-mode) 
+                  "<" "<_>" "</_>" :transform 'sp-match-sgml-tags)
+    (sp-local-tag '(tex-mode plain-tex-mode latex-mode) 
+    	        "\\b" "\\begin{_}" "\\end{_}")
+  
+    (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)))
+#+end_src
+
+** Snippets
+#+begin_src emacs-lisp
+  (sacha/package-install 'yasnippet)
+  (sacha/package-install 'java-snippets)
+  ;;(sacha/package-install 'helm-c-yasnippet)
+  (use-package yasnippet
+    :init
+    (progn
+      (setq yas-snippet-dirs "~/.emacs.d/snippets/")
+      (yas-global-mode t)))
+#+end_src
+
+** Javascript
+#+begin_src emacs-lisp
+  (sacha/package-install 'json-mode)
+  (sacha/package-install 'js2-mode)
+  (sacha/package-install 'ac-js2)
+  (sacha/package-install 'tern)
+  (sacha/package-install 'tern-auto-complete)
+  
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  
+  (use-package tern
+    :init
+    (progn
+    (tern-ac-setup)
+    (add-hook 'js-mode-hook 'tern-ac-setup 'tern-mode)))
+  
+  (add-hook 'js2-mode-hook 'tern-ac-setup)
+  (add-hook 'js2-mode-hook 'tern-mode)
+  (use-package js2-mode)
+#+end_src
+
+** Web
+#+begin_src emacs-lisp
+  (sacha/package-install 'web-mode)
+  (sacha/package-install 'ac-html)
+  (use-package web-mode
+    :init
+    (progn
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+    (setq web-mode-engines-alist
+                                  '(("underscorejs"    . "\\.js\\'")
+  				  ("django"  . "\\.html\\.")))))
+  (use-package ac-html
+   :init 
+    (progn
+    (add-to-list 'web-mode-ac-sources-alist
+  	       '("html" . (ac-source-html-tag
+  			   ac-source-html-attribute)))))
 #+end_src
