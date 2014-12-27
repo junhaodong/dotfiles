@@ -1,6 +1,7 @@
-###
+####
 # Junhao's zsh config
-###
+####
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -25,9 +26,6 @@ COMPLETION_WAITING_DOTS="true"
 # Load plugins (can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git python pip zsh-syntax-highlighting)
 
-###
-# User configuration
-###
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/junhao/.rvm/bin:/home/junhao/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -41,7 +39,10 @@ export EDITOR='emacs -nw'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Global aliases; Local ones are within ZSH_CUSTOM
+####
+# Aliases and variables
+####
+
 alias emacs='emacs -nw'
 
 alias .2='cd ../..'
@@ -51,23 +52,41 @@ alias -g L='| less'
 alias -g TL='| tail -20'
 alias -g NIL="> /dev/null 2>&1"
 
+# List direcory contents
+alias l='ls -CF'
+alias ll='ls -Al'
+alias la='ls -A'
+
+# Local
+alias sys='cd ~/code/systems'
+alias softdev='cd ~/code/softdev'
+
+alias virtenv='source ~/code/softdev/virtenv/bin/activate'
+
 # Network variables
 lisa='junhao.dong@149.89.160'
 homer='junhao.dong@149.89.150'
 bart='junhao.dong@149.89.151'
 marge='junhao.dong@149.89.161'
 
+####
+# Scripts
+####
+
 # Updates time displayed in the prompt every second
-#promptTime() {
-#  emulate -L zsh
-#  zmodload -i zsh/sched
-#  # Remove existing event, so that multiple calls to `promptTime` work.
-#  integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)promptTime]}
-#  (( i )) && sched -$i
-#  # Test that zle is running before calling the widget
-#  # Otherwise update on entry to zle
-#  zle && zle reset-prompt
-#  # Increment time by a second
-#  sched +1 promptTime
-#}
+promptTime() {
+		emulate -L zsh
+		zmodload -i zsh/sched
+		# Remove existing event, so that multiple calls to `promptTime` work.
+		integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)promptTime]}
+		(( i )) && sched -$i
+		# Test that zle is running before calling the widget
+		# Otherwise update on entry to zle
+		zle && zle reset-prompt
+		# Increment time by a second
+		sched +1 promptTime
+}
 #promptTime
+
+# Color
+eval `dircolors $HOME/.dircolors`
