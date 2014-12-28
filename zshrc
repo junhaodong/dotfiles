@@ -43,7 +43,7 @@ export EDITOR='emacs -nw'
 # Aliases and variables
 ####
 
-alias emacs='emacs -nw'
+alias -g emacs='emacs -nw'
 
 alias .2='cd ../..'
 alias .3='cd ../../..'
