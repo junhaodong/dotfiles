@@ -108,7 +108,7 @@ Based on Sacha Chua's and Mike Zamansky's config
    
 * Navigation
 ** Pop to Mark
-#+begin_src emacs-lisp **:tangle no**
+#+begin_src emacs-lisp :tangle no
   (bind-key "C-x p" 'pop-to-mark-command)
   (setq set-mark-command-repeat-pop t)
 #+end_src
@@ -161,7 +161,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 
 ** Aggressive Indent
-#+begin_src emacs-lisp **:tangle no**
+#+begin_src emacs-lisp :tangle no
   (sacha/package-install 'aggressive-indent)
   (use-package aggressive-indent
     :init
