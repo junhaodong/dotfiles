@@ -137,5 +137,3 @@ lisa='junhao.dong@149.89.160'
 homer='junhao.dong@149.89.150'
 bart='junhao.dong@149.89.151'
 marge='junhao.dong@149.89.161'
-
-setxkbmap -option ctrl:nocaps
