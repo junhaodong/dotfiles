@@ -134,8 +134,8 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 * Programming
 ** Tab Size
-#+begin_src emacs-lisp
-  (setq-default tab-width 2)
+#+begin_src emacs-lisp :tangle no
+  (setq-default tab-width 1)
 #+end_src
 
 ** Autocomplete
