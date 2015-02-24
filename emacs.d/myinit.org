@@ -239,7 +239,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 
 ** Snippets
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (sacha/package-install 'yasnippet)
   (sacha/package-install 'java-snippets)
   ;;(sacha/package-install 'helm-c-yasnippet)
