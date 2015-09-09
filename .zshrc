@@ -44,6 +44,7 @@ export EDITOR='emacs -nw'
 ####
 
 alias -g emacs='emacs -nw'
+alias -g racket='/usr/racket/bin/racket'
 
 alias .2='cd ../..'
 alias .3='cd ../../..'
