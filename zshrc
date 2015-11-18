@@ -61,7 +61,7 @@ alias la='ls -A'
 alias sys='cd ~/code/systems'
 alias softdev='cd ~/code/softdev'
 
-alias virtenv='source ~/code/softdev/virtenv/bin/activate'
+alias virtenv='source ~/code/virtenv/bin/activate'
 
 # Network variables
 lisa='junhao.dong@149.89.160'
