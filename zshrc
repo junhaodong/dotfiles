@@ -62,6 +62,7 @@ alias sys='cd ~/code/systems'
 alias softdev='cd ~/code/softdev'
 
 alias virtenv='source ~/code/virtenv/bin/activate'
+alias venv3='source ~/code/venv3/bin/activate'
 
 # Network variables
 lisa='junhao.dong@149.89.160'
