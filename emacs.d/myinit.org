@@ -6,7 +6,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 ** Personal Info
 #+begin_src emacs-lisp
   (setq user-full-name "Junhao Dong"
-        user-mail-address "junhao.dong96@gmail.com")
+	user-mail-address "junhao.dong96@gmail.com")
 #+end_src
 
 ** Setup Package Install
@@ -16,8 +16,8 @@ Based on Sacha Chua's and Mike Zamansky's config
      If REPOSITORY is specified, use that."
     (unless (package-installed-p package)
       (let ((package-archives (if repository
-                                  (list (assoc repository package-archives))
-                                package-archives)))
+				  (list (assoc repository package-archives))
+				package-archives)))
       (package-install package))))
   (sacha/package-install 'use-package)
   (require 'use-package)
@@ -30,7 +30,7 @@ Based on Sacha Chua's and Mike Zamansky's config
   (setq version-control t)
   (setq vc-make-backup-files t)
   (setq auto-save-file-name-transforms 
-        '((".*" "~/.emacs.d/auto-save-list/" t)))
+	'((".*" "~/.emacs.d/auto-save-list/" t)))
 #+end_src
 
 ** Interface Settings
@@ -62,21 +62,21 @@ Based on Sacha Chua's and Mike Zamansky's config
     :init
     (progn
       (setq-default mode-line-format 
-  		  '("%e"
-  		    mode-line-front-space
-  		    mode-line-mule-info
-  		    mode-line-client
-  		    mode-line-modified
-  		    mode-line-remote
-  		    mode-line-frame-identification
-  		    mode-line-buffer-identification
-  		    "   "
-  		    mode-line-position
-  		    (vc-mode vc-mode)
-  		    "  "
-  		    mode-line-modes
-  		    mode-line-misc-info
-   		    mode-line-end-spaces))))
+		  '("%e"
+		    mode-line-front-space
+		    mode-line-mule-info
+		    mode-line-client
+		    mode-line-modified
+		    mode-line-remote
+		    mode-line-frame-identification
+		    mode-line-buffer-identification
+		    "	"
+		    mode-line-position
+		    (vc-mode vc-mode)
+		    "  "
+		    mode-line-modes
+		    mode-line-misc-info
+		    mode-line-end-spaces))))
 
 #+end_src
 
@@ -108,7 +108,7 @@ Based on Sacha Chua's and Mike Zamansky's config
    
 * Navigation
 ** Pop to Mark
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (bind-key "C-x p" 'pop-to-mark-command)
   (setq set-mark-command-repeat-pop t)
 #+end_src
@@ -124,18 +124,21 @@ Based on Sacha Chua's and Mike Zamansky's config
 ** Structure Templates
 #+begin_src emacs-lisp
   (setq org-structure-template-alist 
-        '(("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>")
-          ("l" "#+begin_src emacs-lisp\n?\n#+end_src" "<src lang=\"emacs-lisp\">\n?\n</src>")
-          ("L" "#+latex: " "<literal style=\"latex\">?</literal>")
-          ("h" "#+begin_html\n?\n#+end_html" "<literal style=\"html\">\n?\n</literal>")
-          ("H" "#+html: " "<literal style=\"html\">?</literal>")
-          ("a" "#+begin_ascii\n?\n#+end_ascii")
-          ("i" "#+index: ?" "#+index: ?")))
+	'(("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>")
+	  ("l" "#+begin_src emacs-lisp\n?\n#+end_src" "<src lang=\"emacs-lisp\">\n?\n</src>")
+	  ("L" "#+latex: " "<literal style=\"latex\">?</literal>")
+	  ("h" "#+begin_html\n?\n#+end_html" "<literal style=\"html\">\n?\n</literal>")
+	  ("H" "#+html: " "<literal style=\"html\">?</literal>")
+	  ("a" "#+begin_ascii\n?\n#+end_ascii")
+	  ("i" "#+index: ?" "#+index: ?")))
 #+end_src
 * Programming
-** Tab Size
-#+begin_src emacs-lisp :tangle no
-  (setq-default tab-width 1)
+** Tabbing
+#+begin_src emacs-lisp
+  (setq-default tab-width 2)
+  (setq-default tab-always-indent 'complete)
+  (defvaralias 'c-basic-offset 'tab-width)
+  (defvaralias 'cperl-indent-level 'tab-width)
 #+end_src
 
 ** Autocomplete
@@ -161,7 +164,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 
 ** Aggressive Indent
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (sacha/package-install 'aggressive-indent)
   (use-package aggressive-indent
     :init
