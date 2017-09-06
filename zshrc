@@ -1,6 +1,6 @@
-# -------------------------------------
+####
 # Junhao's zsh config
-# -------------------------------------
+####
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -15,7 +15,7 @@ ZSH_THEME="custom"
 export UPDATE_ZSH_DAYS=27
 
 # Enable command auto-correction.
-ENABLE_CORRECTION="false"
+ENABLE_CORRECTION="true"
 
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -32,7 +32,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR='emacs -nw'
-export ALTERNATE_EDITOR=""
 
 # May need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -40,22 +39,21 @@ export ALTERNATE_EDITOR=""
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# -------------------------------------
+####
 # Aliases and variables
-# -------------------------------------
+####
 
-alias emacs='emacs -nw'
-alias ec='emacsclient'
-alias rkt='/usr/racket/bin/racket'
+alias -g emacs='emacs -nw'
+alias -g racket='/usr/racket/bin/racket'
 
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
-alias L='| less'
-alias TL='| tail -20'
-alias NIL="> /dev/null 2>&1"
+alias -g L='| less'
+alias -g TL='| tail -20'
+alias -g NIL="> /dev/null 2>&1"
 
 # List direcory contents
 alias l='ls -CF'
@@ -63,21 +61,11 @@ alias ll='ls -Al'
 alias la='ls -A'
 
 # Local
-alias sys='cd ~/code/systems'
-alias softdev='cd ~/code/softdev'
+# for local aliases
 
-alias virtenv='source ~/code/.virtenv/bin/activate'
-alias venv3='source ~/code/.venv3/bin/activate'
-
-# Network variables
-lisa='junhao.dong@149.89.160'
-homer='junhao.dong@149.89.150'
-bart='junhao.dong@149.89.151'
-marge='junhao.dong@149.89.161'
-
-# -------------------------------------
+####
 # Scripts
-# -------------------------------------
+####
 
 # Updates time displayed in the prompt every second
 promptTime() {
