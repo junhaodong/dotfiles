@@ -125,15 +125,3 @@ alias gp='git push'
 alias gdt='git difftool'
 alias gcmsg='git commit -am'
 alias ga='git add'
-alias gm='git merge'
-
-# Local shortcuts
-alias sys='cd ~/code/systems'
-alias softdev='cd ~/code/softdev'
-alias virtenv='source ~/code/virtenv/bin/activate'
-
-# Network variables
-lisa='junhao.dong@149.89.160'
-homer='junhao.dong@149.89.150'
-bart='junhao.dong@149.89.151'
-marge='junhao.dong@149.89.161'

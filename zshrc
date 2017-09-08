@@ -60,9 +60,6 @@ alias l='ls -CF'
 alias ll='ls -Al'
 alias la='ls -A'
 
-# Local
-# for local aliases
-
 ####
 # Scripts
 ####
@@ -77,7 +74,7 @@ promptTime() {
 		# Test that zle is running before calling the widget
 		# Otherwise update on entry to zle
 		zle && zle reset-prompt
-		# Increment time by a second
+p		# Increment time by a second
 		sched +1 promptTime
 }
 #promptTime
