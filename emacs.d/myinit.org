@@ -81,7 +81,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 
 *** Hide Minor Modes
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (require 'diminish)
   (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
   (eval-after-load "smartparens" '(diminish 'smartparens-mode))
@@ -135,10 +135,9 @@ Based on Sacha Chua's and Mike Zamansky's config
 * Programming
 ** Tabbing
 #+begin_src emacs-lisp
-  (setq-default tab-width 2)
-  (setq-default tab-always-indent 'complete)
-  (defvaralias 'c-basic-offset 'tab-width)
-  (defvaralias 'cperl-indent-level 'tab-width)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'insert-tab)
 #+end_src
 
 ** Autocomplete
@@ -242,14 +241,13 @@ Based on Sacha Chua's and Mike Zamansky's config
 #+end_src
 
 ** Snippets
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (sacha/package-install 'yasnippet)
   (sacha/package-install 'java-snippets)
-  ;;(sacha/package-install 'helm-c-yasnippet)
   (use-package yasnippet
     :init
     (progn
-      (setq yas-snippet-dirs "~/.emacs.d/snippets/")
+      (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
       (yas-global-mode t)))
 #+end_src
 
