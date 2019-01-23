@@ -162,15 +162,6 @@ Based on Sacha Chua's and Mike Zamansky's config
       (auto-complete-mode t)))
 #+end_src
 
-** Aggressive Indent
-#+begin_src emacs-lisp
-  (sacha/package-install 'aggressive-indent)
-  (use-package aggressive-indent
-    :init
-    (progn
-      (global-aggressive-indent-mode)))
-#+end_src
-
 ** Smartparens
 #+begin_src emacs-lisp
 (sacha/package-install 'smartparens)
