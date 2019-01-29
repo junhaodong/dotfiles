@@ -1,4 +1,4 @@
-# Junhao's zsh config
+### Junhao's zsh config
 
 export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=60
@@ -12,7 +12,7 @@ plugins=(git python pip)
 source $ZSH/oh-my-zsh.sh
 
 
-# Aliases
+## Aliases
 alias emacs='emacs -nw'
 
 alias .2='cd ../..'
@@ -26,5 +26,16 @@ alias l='ls -CF'
 alias ll='ls -Al'
 alias la='ls -A'
 
-# Solarized dircolors (requires GNU coreutils)
+## Solarized dircolors (requires GNU coreutils)
 eval `gdircolors $HOME/.dircolors`
+
+## Fuzzy complete
+# 0 -- vanilla completion (abc => abc)
+# 1 -- smart case completion (abc => Abc)
+# 2 -- word flex completion (abc => A-big-Car)
+# 3 -- full flex completion (abc => ABraCadabra)
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+  
