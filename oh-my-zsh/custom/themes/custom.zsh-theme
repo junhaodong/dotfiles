@@ -30,17 +30,13 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✗ "
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%}✓ "
 
-ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg[red]%}["
-ZSH_THEME_RVM_PROMPT_SUFFIX="]"
-
-# Left prompt
-# Shorten CWD if exceeds 30 chars
+# Left prompt (shorten cwd if >= 30 chars)
 PROMPT='%{$fg[yellow]%}λ %m '
 PROMPT+='%{$fg[green]%}%30<...<%~%<< '
-PROMPT+='%{$fg[yellow]%}→ %{$reset_color%}' 
+PROMPT+='%{$fg[yellow]%}→ '
 
 # Right prompt
-RPROMPT='$(git_custom_status)$(ruby_prompt_info) %{$fg[yellow]%}%*'
+RPROMPT='$(git_custom_status)$(ruby_prompt_info) %{$fg[yellow]%}%*%{$reset_color%}'
 
-# More possible chars:
+# More chars:
 # ☀ ⚡ ♈ ✹ ǁ ǂ Ŧ ✡ 

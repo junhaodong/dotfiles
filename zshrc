@@ -29,6 +29,9 @@ alias la='ls -A'
 ## Solarized dircolors (requires GNU coreutils)
 eval `gdircolors $HOME/.dircolors`
 
+## Use dircolors in tab completion
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
 ## Fuzzy complete
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
@@ -38,4 +41,3 @@ zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
-  
