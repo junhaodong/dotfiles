@@ -145,7 +145,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 ** Tabbing
 #+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
+  (setq-default tab-width 4)
   (setq indent-line-function 'insert-tab)
 #+end_src
 
