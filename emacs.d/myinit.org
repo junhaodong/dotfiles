@@ -51,7 +51,7 @@ Based on Sacha Chua's and Mike Zamansky's config
 ** Theme
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-  (load-theme 'solarized-dark t)
+  (load-theme 'solarized t)
 
   ;; Light emacs in GUI
   ;; Dark in terminal
