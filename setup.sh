@@ -16,18 +16,19 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 echo "Done"
 
 echo "Copying bash, zsh, emacs, dircolors..."
-cp $SCRIPT_HOME/bashrc ~/.bashrc
-cp $SCRIPT_HOME/zshrc ~/.zshrc
-cp -r $SCRIPT_HOME/oh-my-zsh/custom/ ~/.oh-my-zsh/custom
-cp -r $SCRIPT_HOME/emacs.d/ ~/.emacs.d
-cp $SCRIPT_HOME/dircolors ~/.dircolors
+cp $SCRIPT_HOME/.bash_profile ~/.bash_profile
+cp $SCRIPT_HOME/.bashrc ~/.bashrc
+cp $SCRIPT_HOME/.zshrc ~/.zshrc
+cp -r $SCRIPT_HOME/.oh-my-zsh/custom/ ~/.oh-my-zsh/custom
+cp -r $SCRIPT_HOME/.emacs.d/ ~/.emacs.d
+cp $SCRIPT_HOME/.dircolors ~/.dircolors
 echo "Done"
 
 echo "Setup Solarized emacs..."
 # Optionally customize to dark theme
 git clone https://github.com/sellout/emacs-color-theme-solarized.git
-mv emacs-color-theme-solarized/* $SCRIPT_HOME/emacs.d/themes/
-rm -r emacs-color-theme-solarized
+mv emacs-color-theme-solarized/* $SCRIPT_HOME/.emacs.d/themes/
+rm -rf emacs-color-theme-solarized/
 echo "Done"
 
 echo "Setup Solarized dircolors..."
