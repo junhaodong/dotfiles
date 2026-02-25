@@ -1,23 +1,36 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# .bashrc
+# bashrc is for aliases, functions, and shell configuration intended for use in
+# interactive shells.  However, in some circumstances, bash sources bashrc even
+# in non-interactive shells (e.g., when using scp), so it is standard practice
+# to check for interactivity at the top of .bashrc and return immediately if
+# the shell is not interactive.  The following line does that; don't remove it!
+[[ $- != *i* ]] && return
 
-export EDITOR="emacs -nw"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Load CentOS stuff and Facebook stuff (don't remove these lines).
+source /etc/bashrc
+source /usr/facebook/ops/rc/master.bashrc
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-    *) return;;
-esac
-
-# Don't put duplicate lines or lines starting with space in the history
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
+# Keep oodles of command history (see https://fburl.com/bashhistory).
+HISTFILESIZE=-1
+HISTSIZE=1000000
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=5000
+# Enforce a safer 'sudo rm' for interactive sessions (https://fburl.com/workplace/pbo3xan0)
+if [[ $- == *i* ]]; then
+    sudo() {
+        if [ "$1" = "rm" ]; then
+            shift
+            command sudo rm --preserve-root=all --one-file-system "$@"
+        else
+            command sudo "$@"
+        fi
+    }
+fi
+
+#
+# Set up personal aliases, functions, etc.  See https://fburl.com/bash.
+# ...(put your own stuff here!)...
+#
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -68,10 +81,6 @@ case "$TERM" in
 		*)
 				;;
 esac
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Local alias definitions
 if [ -f ~/.bash_aliases ]; then
@@ -125,3 +134,6 @@ alias gp='git push'
 alias gdt='git difftool'
 alias gcmsg='git commit -am'
 alias ga='git add'
+. /home/junhao/local/fbsource/whatsapp/server/erl/tools/waserver_bashrc
+export COLORTERM=truecolor
+export CLAUDE_CODE_USE_GCP_DIRECT=1
