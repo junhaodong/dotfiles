@@ -22,6 +22,7 @@ cp $SCRIPT_HOME/.zshrc ~/.zshrc
 cp -r $SCRIPT_HOME/.oh-my-zsh/custom/ ~/.oh-my-zsh/custom
 cp -r $SCRIPT_HOME/.emacs.d/ ~/.emacs.d
 cp $SCRIPT_HOME/.dircolors ~/.dircolors
+cp $SCRIPT_HOME/.inputrc ~/.inputrc
 echo "Done"
 
 echo "Setup Solarized emacs..."
